@@ -7,10 +7,10 @@ name: Release, deploy and create next iteration
 on:
   workflow_dispatch:
     inputs:
-      releaseVersion:
+      release_version:
         description: "Release number version to create"
         required: true
-      nextVersion:
+      next_version:
         description: "SNAPSHOT number of the next development version"
         required: true
 
