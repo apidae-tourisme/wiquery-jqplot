@@ -51,7 +51,7 @@ jobs:
       - name: prepare
         run: mvn --batch-mode -Dtag=${{ github.event.inputs.release_version }} release:prepare -DreleaseVersion=${{ github.event.inputs.release_version }} -DdevelopmentVersion=${{ github.event.inputs.next_version }}
       - name: perform
-        run: mvn --batch-mode release:perform
+        run: mvn --batch-mode release:perform -Darguments="-Dmaven.javadoc.skip=true"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
