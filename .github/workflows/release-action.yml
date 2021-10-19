@@ -26,7 +26,7 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Verify
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn --batch-mode --update-snapshots -DperformRelease -Dmaven.javadoc.skip=true verify
 
   prepare-release:
     runs-on: ubuntu-latest
@@ -51,7 +51,7 @@ jobs:
       - name: prepare
         run: mvn --batch-mode -Dtag=${{ github.event.inputs.release_version }} release:prepare -DreleaseVersion=${{ github.event.inputs.release_version }} -DdevelopmentVersion=${{ github.event.inputs.next_version }}
       - name: perform
-        run: mvn --batch-mode release:perform -Darguments="-Dmaven.javadoc.skip=true"
+        run: mvn --batch-mode release:perform -Darguments="-Dmaven.javadoc.skip=true -DperformRelease"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
